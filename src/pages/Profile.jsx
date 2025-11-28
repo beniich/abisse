@@ -1,9 +1,9 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+
 import { User, Settings, Shield, CreditCard } from 'lucide-react';
 
 const Profile = () => {
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
 
     return (
         <div className="max-w-4xl mx-auto space-y-8">

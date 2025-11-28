@@ -64,7 +64,7 @@ const Marketplace = () => {
                     <ProductCard
                         key={item}
                         title={`Gravity Module MK-${item}`}
-                        price={(Math.random() * 2).toFixed(2)}
+                        price={(item * 0.5 + 1).toFixed(2)}
                         category={item % 2 === 0 ? 'Component' : 'Vehicle'}
                     />
                 ))}

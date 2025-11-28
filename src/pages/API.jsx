@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+
 import { Key, FileText, Play, Copy } from 'lucide-react';
 
 const API = () => {
@@ -73,7 +74,7 @@ const API = () => {
                         </p>
                         <div className="bg-black/50 p-4 rounded-lg font-mono text-sm text-[var(--color-primary-light)]">
                             curl https://api.abisse.io/v1/status \
-                            <br />  -H "Authorization: Bearer YOUR_API_KEY"
+                            <br />  -H &quot;Authorization: Bearer YOUR_API_KEY&quot;
                         </div>
                     </motion.div>
                 )}
@@ -82,11 +83,11 @@ const API = () => {
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass-panel p-6">
                         <div className="grid grid-cols-2 gap-6 h-[500px]">
                             <div className="bg-black/30 rounded-lg p-4 font-mono text-sm">
-                                <p className="text-gray-500 mb-2">// Request Body</p>
+                                <p className="text-gray-500 mb-2">{'// Request Body'}</p>
                                 <textarea className="w-full h-[90%] bg-transparent resize-none focus:outline-none text-white" defaultValue='{ "query": "antigravity_module_v2" }' />
                             </div>
                             <div className="bg-black/30 rounded-lg p-4 font-mono text-sm">
-                                <p className="text-gray-500 mb-2">// Response</p>
+                                <p className="text-gray-500 mb-2">{'// Response'}</p>
                                 <div className="text-[var(--color-primary-light)]">
                                     Waiting for request...
                                 </div>

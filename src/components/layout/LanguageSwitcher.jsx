@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+
 const languages = [
     { code: 'en', label: 'EN' },
     { code: 'zh', label: '中文' },

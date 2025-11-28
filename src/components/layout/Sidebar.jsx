@@ -11,6 +11,7 @@ import {
     ChevronRight,
     Hexagon
 } from 'lucide-react';
+import clsx from 'clsx';
 
 const Sidebar = () => {
     const { t } = useTranslation();
@@ -27,33 +28,20 @@ const Sidebar = () => {
         <motion.div
             initial={{ width: 240 }}
             animate={{ width: isCollapsed ? 80 : 240 }}
-            className="h-screen glass-panel border-r border-white/10 relative flex flex-col z-40"
-            style={{
-                background: 'linear-gradient(180deg, rgba(5,5,16,0.9) 0%, rgba(0,127,115,0.1) 100%)',
-                borderColor: 'var(--color-border)'
-            }}
+            className="h-screen bg-[#0F172A] text-white flex flex-col z-40 transition-all duration-300"
         >
             {/* Logo Section */}
-            <div className="p-6 flex items-center justify-center relative overflow-hidden">
-                <motion.div
-                    className="absolute inset-0 opacity-20"
-                    animate={{
-                        background: [
-                            'radial-gradient(circle at 50% 50%, var(--color-primary-deep) 0%, transparent 50%)',
-                            'radial-gradient(circle at 50% 50%, var(--color-primary-light) 0%, transparent 60%)',
-                            'radial-gradient(circle at 50% 50%, var(--color-primary-deep) 0%, transparent 50%)'
-                        ]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                />
-                <Hexagon className="text-[var(--color-primary-light)] animate-pulse-glow" size={32} />
+            <div className="p-6 flex items-center gap-3">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-[#0F172A]">
+                    <Hexagon size={20} fill="currentColor" />
+                </div>
                 <AnimatePresence>
                     {!isCollapsed && (
                         <motion.h1
                             initial={{ opacity: 0, width: 0 }}
                             animate={{ opacity: 1, width: 'auto' }}
                             exit={{ opacity: 0, width: 0 }}
-                            className="ml-3 text-2xl font-heading tracking-wider neon-text whitespace-nowrap overflow-hidden"
+                            className="text-xl font-bold tracking-wide whitespace-nowrap overflow-hidden"
                         >
                             ABISSE
                         </motion.h1>
@@ -62,29 +50,24 @@ const Sidebar = () => {
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 px-4 py-8 space-y-4">
+            <nav className="flex-1 px-4 py-8 space-y-2">
                 {navItems.map((item) => (
                     <NavLink
                         key={item.path}
                         to={item.path}
-                        className={({ isActive }) => `
-              flex items-center px-4 py-3 rounded-xl transition-all duration-300 group relative overflow-hidden
-              ${isActive ? 'text-[var(--color-primary-light)]' : 'text-gray-400 hover:text-white'}
-            `}
+                        className={({ isActive }) => clsx(
+                            "flex items-center px-4 py-3 rounded-xl transition-all duration-200 group relative overflow-hidden",
+                            isActive ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5"
+                        )}
                     >
                         {({ isActive }) => (
                             <>
                                 {isActive && (
-                                    <motion.div
-                                        layoutId="activeNav"
-                                        className="absolute inset-0 bg-[var(--color-surface-hover)] border border-[var(--color-primary-deep)] rounded-xl"
-                                        initial={false}
-                                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    />
+                                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-[#FF5252] rounded-r-full" />
                                 )}
                                 <item.icon
-                                    size={24}
-                                    className={`relative z-10 transition-transform group-hover:scale-110 ${isActive ? 'animate-pulse-glow' : ''}`}
+                                    size={20}
+                                    className={clsx("relative z-10", isActive ? "text-white" : "text-gray-400 group-hover:text-white")}
                                 />
                                 <AnimatePresence>
                                     {!isCollapsed && (
@@ -92,7 +75,7 @@ const Sidebar = () => {
                                             initial={{ opacity: 0, x: -10 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -10 }}
-                                            className="ml-4 font-body text-lg relative z-10 whitespace-nowrap"
+                                            className="ml-4 font-medium text-sm relative z-10 whitespace-nowrap"
                                         >
                                             {t(item.label)}
                                         </motion.span>
@@ -107,9 +90,9 @@ const Sidebar = () => {
             {/* Collapse Toggle */}
             <button
                 onClick={() => setIsCollapsed(!isCollapsed)}
-                className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-[var(--color-bg-void)] border border-[var(--color-primary-deep)] flex items-center justify-center text-[var(--color-primary-light)] hover:scale-110 transition-transform z-50"
+                className="absolute -right-3 top-12 w-6 h-6 rounded-full bg-white text-[#0F172A] flex items-center justify-center shadow-md hover:scale-110 transition-transform z-50"
             >
-                {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+                {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
             </button>
         </motion.div>
     );
